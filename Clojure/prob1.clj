@@ -1,3 +1,5 @@
+(ns prob1)
+
 (defn multipleOf [x n] (= (mod x n) 0))
 
 (defn threeOrFive [x] (or (multipleOf x 3) (multipleOf x 5)))
