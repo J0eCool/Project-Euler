@@ -1,11 +1,29 @@
-(ns prob5
-  (:use factors))
+(ns prob5)
 
-(defn factorial [n]
-  (if (< n 2) n
-    (* n (factorial (dec n)))))
+(def primes
+  (let [getPrime
+        (fn [n]
+          (case n
+            0 2
+            (let
+              [soFar (take n primes)
+               find-next
+               (fn [v]
+                 (let [isPrime (reduce #(and %1 %2) (map #(= 0 (v mod %1)) soFar))]
+                   (if isPrime v (recur (inc v)))))]
+              soFar)))]
+    (map getPrime (range))))
 
-(map factorial (range 21))
+(take 1 primes)
+(getPrime 4)
+(take 12 (range 4))
+(last '(2))
+(take 3 primes)
 
-(factors 12)
-(primeFactors (factorial 15))
+(getPrime 1)
+
+(take 1 primes)
+
+primes
+
+(take 2 (map getPrime (range)))
