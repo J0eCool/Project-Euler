@@ -1,5 +1,8 @@
 (ns digits)
 
+(defn seq-contains? [lst v]
+  (< 0 (count (filter (partial = v) lst))))
+
 (defn charToInt [c]
   (- (int c) (int \0)))
 

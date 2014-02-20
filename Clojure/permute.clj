@@ -1,9 +1,6 @@
 (ns permute
   (:use digits))
 
-(defn seq-contains? [lst v]
-  (< 0 (count (filter (partial = v) lst))))
-
 (defn permute [lst]
   (loop [poss [[]]
          c (count lst)]
