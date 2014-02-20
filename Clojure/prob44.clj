@@ -1,10 +1,13 @@
 (def pentagonals
   (map (fn [n] (/ (* n (- (* 3 n) 1)) 2)) (range)))
 
+(defn approx [x y]
+  (> 0.000001
+     (Math/abs (- x y))))
+
 (defn is-pent? [n]
-  (and
-   (> n 0)
-   (= n (first (drop-while (partial > n) pentagonals)))))
+  (let [p (/ (+ (Math/sqrt (+ 1 (* n 24))) 1) 6)]
+    (approx p (float (int p)))))
 
 (loop [j 1]
   (let [pj (nth pentagonals j)
@@ -15,7 +18,8 @@
                    :diff (- pj pk)}))
         pent-pairs (filter
                     #(and (is-pent? (:sum %))
-                          (is-pent? (:diff %)))
+                          (is-pent? (:diff %))
+                          )
                     pairs)]
     (if (not= 0 (count pent-pairs))
       pent-pairs
