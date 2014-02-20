@@ -14,3 +14,10 @@
            (recur
             (rest lst)
             (+ (* 10 acc) (first lst))))))
+
+(defn rotations [n]
+  (let [lst (numToDig n)]
+    (for [i (range (count lst))]
+      (let [split (split-at i lst)
+            joined (concat (second split) (first split))]
+        (digToNum joined)))))
